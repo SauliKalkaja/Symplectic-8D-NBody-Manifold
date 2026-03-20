@@ -30,6 +30,10 @@ This project remains an open-source, iterative investigation into the geometric 
 
 ---
 
+## v2.2 Update: Full derivation of the 12D Action Principle and GR Correspondence added to Section 4.8.
+
+---
+
 ## 🚀 The Verification Suite (The "Public Six")
 
 To ensure total reproducibility, we provide six specialized scripts that validate the theory across forty orders of magnitude:
