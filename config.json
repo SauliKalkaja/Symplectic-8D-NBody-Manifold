@@ -1,9 +1,0 @@
-{
-  "mu": 132712440041.939,
-  "c_light": 299792.458,
-  "kappa": 50.0,
-  "lambda_opt": 10.0,
-  "initial_r": [149597870.7, 0.0, 0.0],
-  "initial_v": [0.0, 29.78, 0.0],
-  "description": "Standard 8D Manifold configuration for Solar-scale stability audits."
-}
