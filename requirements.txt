@@ -1,0 +1,5 @@
+numpy
+pandas
+astroquery
+scipy
+streamlit
