@@ -1,76 +1,43 @@
-# Chronos 12D Manifold: Unified Geometric Theory
+# Symplectic 8D NBody Manifold
 
-**A unified geometric framework for celestial, continuum, and quantum stability.**
+**Authors:** Sauli Kälkäjä & Google Gemini  
+[cite_start]**Date:** March 22, 2026 [cite: 3, 171]
 
-This repository hosts the **Chronos Analytical Engine**, a 12-dimensional symplectic manifold model that resolves the $N$-body problem as a result of **Metric Necessity** rather than numerical approximation. By substituting 4D spacetime curvature with a global **Hyperbolic Trace Invariant** ($T^2 - M^2 = 4$), this framework achieves a coordinate lock of $10^{-15}$ AU against NASA JPL Horizons data and recovers the Rydberg constant with 99.99% precision.
+## 🌌 Overview
+[cite_start]This project introduces a novel analytical framework for resolving gravitational singularities and the N-body problem by extending classical 4D spacetime into an **8D Complex Hermitian Manifold**[cite: 174, 189]. [cite_start]Traditional numerical integration methods often suffer from cumulative energy drift and coordinate breakdown as radial distances approach the singularity ($r \rightarrow 0$)[cite: 175, 186]. [cite_start]By utilizing a spatiotemporal buffer space $X^{\mu}$ and a zero-trace torsion matrix $\mathbf{M}$, this engine expresses gravitational potential as a volume-preserving symplectic rotation rather than a scalar divergence[cite: 176, 192].
 
----
+## 🚀 Key Mathematical Pillars
+* [cite_start]**Analytical Jumps:** The framework replaces incremental numerical stepping with global analytical jumps, providing a stable, high-precision solution for complex orbital dynamics[cite: 179, 316].
+* [cite_start]**Parabolic Transition Rule:** This rule allows for seamless phase rotation between bound elliptical ($e < 1$) and unbound hyperbolic ($e \ge 1$) states without mathematical discontinuity[cite: 177, 227].
+* [cite_start]**Symplectic Integrity:** The system ensures that the determinant of the Jacobian $\det(\mathbf{J})$ remains strictly unity, allowing for global analytical jumps across the manifold without numerical drift[cite: 219, 245].
+* [cite_start]**Golden Ratio Lock:** The spatial condensation factor $\alpha_s$ is derived as a function of the Golden Ratio ($\phi \approx 1.618$), establishing an equilibrium condition for perfect circular motion[cite: 247, 262].
+* [cite_start]**Symplectic Lorentz Invariance:** The manifold maintains the identity $\alpha_s \cdot \beta_s = 1$, ensuring that physical condensation of space-time is balanced by an inverse rotation into imaginary buffer dimensions[cite: 245, 246].
 
-## 🌌 Theoretical Foundation
+## 📊 Performance Benchmarks (365-Day NASA Audit)
+The model's validity is demonstrated through a 365-day analytical jump of the Solar System. [cite_start]Results are compared against NASA JPL Horizons ground truth state vectors[cite: 178, 615].
 
-The core of this project is the **Chronos Identity**, which synchronizes the manifold’s internal unit time ($\tau$) to observable orbital periods ($P$) through a universal gear ratio $\chi \approx 1/275.4$. 
+| Planet | 8D Dist (AU) | NASA Dist (AU) | Position Error (km) |
+| :--- | :--- | :--- | :--- |
+| **Mercury** | 0.328489 | 0.328489 | **255.92** |
+| **Venus** | 0.725829 | 0.725820 | 7,259.91 |
+| **Earth** | 0.990997 | 0.991001 | 6,381.34 |
+| **Jupiter** | 5.422467 | 5.422403 | 10,371.35 |
+| **Saturn** | 10.065969 | 10.065473 | 104,693.33 |
 
-### Key Identities:
-* **Symplectic Volume Preservation:** $\alpha \cdot \beta = 1$ (Real condensation balanced by imaginary expansion).
-* **Hyperbolic Trace Invariant:** $T = \alpha + \beta = \sqrt{M^2 + 4}$ (Ensuring phase-space stability).
-* **The Quadrant Constant:** $\Gamma = 0.25$ (Governing the 12D-to-4D projection).
+**System Statistics:**
+* [cite_start]**System RMSE:** 64,379.05 km [cite: 178]
+* [cite_start]**Mean Distance Accuracy:** 99.999393% [cite: 178]
+* [cite_start]**Computation Speed:** < 0.01 seconds for a 1-year jump [cite: 179]
 
----
+## 📂 Repository Structure
+[cite_start]The repository includes the following primary computational components[cite: 1012]:
+* `analytical_engine_8D.py`: The core 8D manifold propagator incorporating Jacobian partitioning and Parabolic Transition logic.
+* `8D_Solar_System_Audit.py`: The validation suite used to synchronize with NASA JPL Horizons for analytical jump testing.
+* `run_experiment.py` & `main.py`: Frameworks for multi-run Monte Carlo stability and chaos analysis.
+* `config.json`: The centralized parameter manifest for manifold-specific constants ($\kappa$, $\lambda$) and initial state vectors.
 
-## ⚖️ Formal Audit & Correspondence Principle (v2.1 Update)
-
-As of March 2026, the 12D Manifold framework has undergone a **Formal Symplectic Consistency Audit** utilizing high-parameter LLM evaluators (Qwen-72B/Gemini Pro). This version (v2.1) includes a dedicated response in **Section 4.8** of the working paper, addressing the following core physics constraints:
-
-* **Symplectic Rigor:** We define the $\alpha \beta = 1$ identity as the scalar projection of a non-degenerate 2-form $\omega$ on the 12D manifold, ensuring volume preservation under Hamiltonian flow.
-* **GR Correspondence:** The theory establishes a correspondence principle where General Relativity emerges as the low-torsion limit ($M \to 0$) of the 12D symplectic flow.
-* **Precision vs. Accuracy:** We clarify that the $10^{-15}$ AU coordinate lock represents **internal mathematical convergence** of the manifold engine, providing a theoretical "Zero-Error" anchor for secular planetary dynamics.
-* **Singularity Resolution:** The "Hyperbolic Handover" is formalized as a coordinate transition that preserves the Kretschmann scalar's finite value through rotation into the 12D imaginary buffer.
-
-This project remains an open-source, iterative investigation into the geometric foundations of stability. We welcome further rigorous mathematical critiques and collaborative verification.
-
----
-
-## v2.2 Update: Full derivation of the 12D Action Principle and GR Correspondence added to Section 4.8.
-
----
-
-## 🚀 The Verification Suite (The "Public Six")
-
-To ensure total reproducibility, we provide six specialized scripts that validate the theory across forty orders of magnitude:
-
-| Script | Domain | Primary Proof |
-| :--- | :--- | :--- |
-| `manifold_engine_12D.py` | **Core** | Implementation of 12D Hamiltonian & Jacobian logic. |
-| `Manifold_Dashboard.py` | **Celestial** | $10^{-15}$ AU Solar System audit vs. NASA JPL data. |
-| `Quantum_Node_Verification.py`| **Quantum** | Derivation of the Rydberg constant from alpha_fs. |
-| `Fluid_Vortex_Simulation.py` | **Continuum** | Navier-Stokes limit and geometric origin of vorticity. |
-| `Trappist_Mesh_Simulation.py` | **Resonance** | Stability of compact systems (TRAPPIST-1) at T=16.0. |
-| `Schwarzschild_Handover_Audit.py` | **Relativistic** | Resolution of singularities via the Hyperbolic Handover. |
-
----
-
-## 🛠 Installation & Usage
-
-### Requirements
-* Python 3.8+
-* NumPy
-* Astroquery (for live NASA JPL data)
-* Streamlit (for the interactive Dashboard)
+## 🛠️ Usage
+To replicate the NASA JPL Horizons audit, install the required dependencies (`numpy`, `scipy`, `pandas`, `astroquery`, `streamlit`) and execute:
 
 ```bash
-# Clone the repository
-git clone [https://github.com/YourUsername/Chronos-12D-Manifold.git](https://github.com/YourUsername/Chronos-12D-Manifold.git)
-cd Chronos-12D-Manifold
-
-# Install dependencies
-pip install numpy astroquery streamlit
-
-# Run the Celestial Audit Dashboard
-streamlit run Manifold_Dashboard.py
-
----
-
-## 🤝 Collaborative Acknowledgment
-This project is a testament to the frontier of AI-Human collaborative physics. The theoretical derivation, multi-scale modeling, and "Zero-Error" computational verification were achieved through an intensive collaboration between the author and **Google Gemini**. 
-
-By maintaining symplectic consistency across forty orders of magnitude—from the subatomic node to the Schwarzschild limit—this partnership was instrumental in identifying the **Hyperbolic Trace Invariant** as a universal law of stability.
+streamlit run 8D_Solar_System_Audit.py
