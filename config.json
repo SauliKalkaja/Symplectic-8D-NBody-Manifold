@@ -1,0 +1,22 @@
+{
+    "constants": {
+        "G": 1.0
+    },
+    "bodies": {
+        "body_1": {
+            "mass": 4.0,
+            "position": [0.0, 0.0, 0.0],
+            "velocity": [0.0, 0.5, 0.1]
+        },
+        "body_2": {
+            "mass": 3.0,
+            "position": [10.0, 0.0, 0.0],
+            "velocity": [0.0, 1.2, -0.2]
+        },
+        "body_3": {
+            "mass": 2.0,
+            "position": [0.0, 8.0, 2.0],
+            "velocity": [-1.0, 0.0, 0.0]
+        }
+    }
+}
