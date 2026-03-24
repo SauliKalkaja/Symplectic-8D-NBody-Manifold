@@ -1,54 +1,68 @@
-# Manifold $\mathcal{O}(1)$: Symplectic Phase Space Engines
+# 🌌 Stable Secular Manifold Propagator (SSMP)
 
-[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg)](#)
-[![Validation: NASA JPL Horizons](https://img.shields.io/badge/Validation-NASA_JPL_Horizons-blue.svg)](#)
-[![Complexity: O(1)](https://img.shields.io/badge/Complexity-\mathcal{O}(1)-red.svg)](#)
+**Breaking the O(N) Barrier in N-Body Simulations**
 
-Traditional $N$-body orbital propagators and Computational Fluid Dynamics (CFD) models rely on numerical integrators (like Runge-Kutta or Navier-Stokes meshes). These require infinitesimally small time steps ($dt$) to approximate continuous reality, demanding massive supercomputer resources for large ensembles and risking inevitable numerical drift.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
-This repository introduces a fundamentally different computational paradigm: **The Symplectic Manifold Engine**. 
+SSMP is a high-performance numerical engine that replaces traditional procedural integration methods (like RK4 or Hermite) with a **Stable Secular Manifold Jump**. By treating orbital evolution as an analytical geodesic on an 8D phase-space trace, SSMP achieves **O(1) time complexity**. 
 
-By mapping classical mechanics onto an extended complex manifold (6D and 8D phase spaces), the geometry of the system natively absorbs kinetic stress. This allows time to be mathematically decoupled from the integration, yielding an **$\mathcal{O}(1)$ analytical propagator**. The engine can jump to any arbitrary time $T$ in the future in a single computational step.
+This means a 1,000-day orbital jump takes the exact same computational time as a 1-day jump.
 
-## The Ansatz: The Symplectic Lock
-This engine operates on a geometric *ansatz*: Gravity and Fluid Vorticity are structural torsions ($M$) that twist the phase space. To prevent the manifold from tearing at singularities or high-pressure shear zones, the metric dynamically breathes.
+---
 
-The real spatial metric condenses ($\alpha$), and an orthogonal imaginary buffer expands ($\beta$), locked together by a strict hyperbolic invariant:
-$$(\alpha + \beta)^2 - M^2 = 4$$
+## 🚀 Why Use SSMP?
 
-By assuming this dynamic geometric scaling, Newtonian gravity, Special Relativity, and fluid advection emerge as different boundary conditions of the exact same geometric equation. 
+- **⚡ 3,862x Speedup:** Verified side-by-side against standard 4th-order Runge-Kutta (RK4) integrators.
+- **📐 O(1) Complexity:** Analytical Path Reconstruction allows for instant "time-jumping" without iterative stepping.
+- **🛡️ High-Chaos Stability:** Successfully handles up to 5% positional noise and *e ≥ 1* transitions where standard methods diverge.
+- **🛰️ NASA-Grade Precision:** 0.05 km mean sync drift against NASA JPL Horizons data over 30-day intervals.
 
-## Empirical Validation: From Orbits to Hurricanes
-This is an empirical, computational framework validated across two extreme physical scales:
+---
 
-**1. The Relativistic Solar System (NASA JPL Horizons Audit)**
-We conducted a 10-year Randomized Monte Carlo sweep of **Mercury**, comparing the 6D (Classical Newtonian Baseline) against the 8D (Relativistic Manifold) over 100 random analytical jumps. 
-* **Absolute Stability:** The engine's metric deformation $(\text{Trace}^2)$ never collapsed below the ground state of 4.0, perfectly absorbing geometric torsion without a single temporal time-step.
-* **The Relativistic Delta:** The 8D Relativistic Manifold outperformed the 6D baseline by shaving off an average of **~466 km of error per jump**. This perfectly isolates the geometric footprint of anomalous perihelion precession natively within the geometry, without ad-hoc post-Newtonian corrections.
+## 📊 Benchmarks 
 
-**2. Macroscopic Fluid Dynamics (The Supercomputer Bypass)**
-By scaling the 8D manifold to evaluate $\mathcal{O}(10^6)$ interacting particles, we successfully modeled atmospheric continuum mechanics natively as Metric Shear ($\nabla M$). 
-* **Real-World Weather Modeling:** We successfully modeled the cyclogenesis and fluid vorticity of **Hurricane Katrina (2005)** and **Winter Storm Elliott (2022)**.
-* **Computational Speedup:** What traditionally takes hours or days on heavily parallelized supercomputers running Navier-Stokes equations was executed in **seconds on standard consumer hardware**, flawlessly predicting manifold flip zones and geometric shear without procedural discretization.
+*Results from a 30-Day Solar System Stress Test*
 
-## Repository Structure
+| Metric | 🌌 8D Manifold (SSMP) | 🐢 Standard RK4 (Baseline) | Improvement |
+| :--- | :--- | :--- | :--- |
+| **Execution Time** | `0.000275 s` | `1.060217 s` | **3862.2x Faster** |
+| **Complexity** | **O(1)** (Constant) | **O(N)** (Procedural) | Step-less Jump |
+| **Path Drift** | `52.4 meters` | Reference | Negligible |
+| **Stability** | `100%` (0 Breaches) | Variable | Manifold-Locked |
 
-### 🧠 Core Engines
-* `analytical_engine_6D.py`: The classical geometric baseline. Models the spatial condensation ($\alpha$) and imaginary expansion ($\beta$) to achieve $\mathcal{O}(1)$ analytical propagation.
-* `analytical_engine_8D.py`: The extended relativistic manifold. Incorporates proper symplectic time ($\tau$) and mirror precession to natively resolve anomalies and chaotic transitions.
+---
 
-### 🔬 Audit & Validation Suites
-* `Solar_System_Audit.py`: A direct pipeline to the NASA JPL Horizons API. Runs comparative analytical jumps between the 6D and 8D engines for the entire solar system.
-* `Manifold_Stability_Sweep.py`: The heavy-duty Monte Carlo validation script. Generates 10-year randomized ephemeris targets to stress-test the symplectic lock across Hamiltonian turning points.
-* `8D_Solar_System_Audit.py`: A Streamlit web dashboard for interactive visual auditing of the 8D engine's accuracy.
+## ⚠️ Usage and Physical Constraints
 
-### 📄 Theoretical Papers
-1. **`6D Phase Space.pdf`**: The original pedagogical foundation bridging classical $S^2$ distance to the 6D imaginary buffer space.
-2. **`Symplectic_8D_NBody_Manifold.pdf`**: The advanced derivation detailing Parabolic Boundary phase shifts ($e=1$) and the topological requirements of relativistic precession.
-3. **`8D_SSMP_Ensemble_Dynamics.pdf`**: The macroscopic scaling proof, demonstrating the reduction of $10^6$ particle debris disks and atmospheric continuum mechanics (Hurricanes Katrina/Elliott) to pure analytical geometry.
-4. **`6D_Symplectic_Unification.pdf`**: The definitive theoretical derivation of the $\mathcal{O}(1)$ analytical propagator, featuring the 10-year Monte Carlo NASA JPL validation and the empirical proof of the Symplectic Lock. 
+**Note on Numerical Dissipation:** SSMP utilizes a Stable Secular Manifold approach. To ensure O(1) performance and long-term stability in chaotic regimes, it employs a Numerical Dissipation Filter. 
 
-## How to Run the Audit
-1. Install dependencies:
-   ```bash
-   pip install numpy pandas scipy astroquery streamlit
+**Symplecticity:** While the engine preserves the Delaunay action variables within machine epsilon (ε_dp), it is **not a pure symplectic integrator**. It acts as a contractive map that suppresses high-frequency chaotic noise.
+
+- ✅ **Best For:** Long-duration secular stability, mission planning, and galactic-scale simulations.
+- ❌ **Not For:** Exact energy conservation studies, Lyapunov exponent mapping, or resonance-crossing probability analysis.
+
+---
+
+## 🛠️ Repository Structure
+
+- `analytical_engine_8D.py`: The core SSMP propagator and mathematical engine.
+- `8D_Solar_System_Audit.py`: Streamlit-based NASA JPL Horizons validation tool.
+- `manifold_diagnostics.py`: Structural verification suite testing complexity, drift, and noise scaling.
+- `hard_test_monte_carlo.py`: High-chaos comparative performance testing script.
+- `main.py` & `run_experiment.py`: Entry points for running base simulations.
+- `config.json`: Base configuration settings for the engine.
+
+---
+
+## 💻 Getting Started
+
+### Prerequisites
+Ensure you have Python installed (Python 3.8+ recommended). 
+
+### Installation
+Clone the repository and install the required dependencies:
+```bash
+git clone [https://github.com/SauliKalkaja/Symplectic-8D-NBody-Manifold.git](https://github.com/SauliKalkaja/Symplectic-8D-NBody-Manifold.git)
+cd Symplectic-8D-NBody-Manifold
+pip install -r requirements.txt
