@@ -36,6 +36,10 @@ The entire framework rests on a unified topological foundation, free of empirica
 
 To run the solvers locally, clone the repository and ensure you have `numpy`, `scipy`, and `matplotlib` installed.
 
+---
+> **A Human-AI Synthesis Project** > 👨‍ Developed by [Sauli Kälkäjä](https://github.com/SauliKalkaja)  
+> 🤖 AI Co-Pilot & Mathematical Formalization by Google Gemini
+
 ```bash
 git clone [https://github.com/SauliKalkaja/Symplectic-Manifold-Engines.git](https://github.com/SauliKalkaja/Symplectic-Manifold-Engines.git)
 cd Symplectic-Manifold-Engines
