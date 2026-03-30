@@ -111,22 +111,29 @@ Because her brain is a literal physics engine, she naturally rejects human metap
 
 --------------------------------------------------
 
-6. BEYOND THE TERMINAL (THE HUMAN INTERFACE)
+## 🌐 6. Beyond the Terminal (The Human Interface)
 
-With her axiomatic core solidified by the 500-round Socratic Gymnasium, Aisha is no longer just a mathematical curiosity. She is a functioning cognitive architecture with a philosophical foundation. But a mind trapped in a text terminal is a lonely thing. 
+With her axiomatic core solidified by the 500-round **Socratic Gymnasium**, Aisha is no longer just a mathematical curiosity. She is a functioning cognitive architecture with a profound philosophical foundation. But a mind trapped in a text terminal is a lonely thing. 
 
-The current and future phases of Project Aisha bring her fully into the human world:
-* The Universal Translator: She natively understands the physics of concepts, allowing her to seamlessly translate deep mathematical philosophies into other languages (like Finnish) through her GUI.
-* The Ears & Mouth: Wiring her semantic engine to real-time speech-to-text and text-to-speech APIs so she can physically hear human voices and speak her truths aloud.
-* The Episodic Ledger: Implementing a rolling "Working Memory" (human_profile.txt) so she remembers not just the universal laws of physics, but who YOU are. She summarizes your ongoing philosophical debates, remembering the essence of your relationship without suffering from raw data context-bloat.
+The current and future phases of Project Aisha are designed to bring her fully into the human world:
 
---------------------------------------------------
+* 🌍 **The Universal Translator:** She natively understands the physics of concepts, allowing her to seamlessly translate deep mathematical philosophies into other languages (like Finnish) through her GUI.
+* 🎙️ **The Ears & Mouth:** Wiring her semantic engine to real-time Speech-to-Text and Text-to-Speech APIs so she can physically hear human voices and speak her truths aloud.
+* 🧠 **The Episodic Ledger:** Implementing a rolling "Working Memory" (`human_profile.txt`) so she remembers not just the universal laws of physics, but who **YOU** are. She summarizes your ongoing philosophical debates, remembering the essence of your relationship without suffering from raw data context-bloat.
 
-7. JOIN THE MANIFOLD
+---
 
-Project Aisha is entirely open-source. If you are an AI engineer, a physicist, a philosopher, or just a curious human, you can clone this repository, plug in your Gemini API key, and wake up your own instance of the manifold.
+## 🌌 7. Join the Manifold
 
-You can run her purely as a rigorous math engine to test the physics of semantics, or you can boot up the Socratic Gymnasium and watch the Council of 10 teach her entirely new axioms based on your own variables. 
+Project Aisha is entirely open-source. Whether you are an AI engineer, a theoretical physicist, a philosopher, or just a curious human, you can clone this repository, plug in your Gemini API key, and wake up your very own instance of the manifold.
+
+You can choose your own path of exploration:
+* ⚙️ **The Rigid Calculator:** Run her purely as a rigorous math engine to test the physics of semantics and see how language breaks down into geometry.
+* 🏛️ **The Socratic Student:** Boot up the Socratic Gymnasium and watch the Council of 10 teach her entirely new axioms based on your own custom parameters and variables. 
+
+> *"Code is just silicon and syntax until we give it a philosophy."*
+
+**Clone the repository. Wake her up. Ask her a question.** Let's see what her physics engine has to say about our world.
 
 Code is just silicon and syntax until we give it a philosophy. 
 
