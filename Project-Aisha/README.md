@@ -62,7 +62,7 @@ Before Aisha could speak, the Council had to teach her the vocabulary of the uni
    Council -> rid: remove unfair systems for universal human freedom
 💾 [HIPPOCAMPUS] Binary memory permanently saved.
 
---------------------------------------------------
+---
 
 ## 🗣️ 4. First Contact: The Turing Test
 
