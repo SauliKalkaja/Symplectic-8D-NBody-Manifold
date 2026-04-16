@@ -3,6 +3,7 @@
 \usepackage{amsmath, amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -44,7 +45,7 @@ Gemini (Google)$^{3, \dagger}$ \\[2pt]
 \maketitle
 
 \begin{abstract}
-We report on Project Aisha, a deterministic cognitive engine that replaces stochastic next-token prediction with geometric jumps on a symplectic manifold of word vectors. Building on prior work that established the 8D Complex Hermitian Manifold for celestial and quantum mechanics under the symplectic lock $\alpha\beta = 1$ and the hyperbolic invariant $(\alpha + \beta)^2 - M^2 = 4$, we apply the same geometric machinery to two language domains: natural English and Python source code. We report \emph{five empirical falsifications} on natural language showing that a symplectic jump by $\arg\max_{v} \langle \mathbf{E}_{\text{norm}}[v], \mathbf{c}_{\text{composed}}\rangle$ cannot produce grammatical sentences because function words are distributionally diffuse in any natural-text co-occurrence embedding. We then report \emph{one positive empirical validation} on Python source: with three minimal additions (log-bigram reweighting, bracket-depth conservation, and a parser-based rejection filter), the same engine produces syntactically valid Python at a 78\% parse rate across 18 test prompts. The engine runs at $\mathcal{O}(1)$ per token, uses $\sim$2.5\,MB on disk, and requires no GPU. We argue this validates the symplectic framework as a \emph{selection} mechanism whose effectiveness depends on the structural regularity of its substrate. All code, embeddings, and results are open source.
+We report on Project Aisha, a deterministic cognitive engine that replaces stochastic next-token prediction with geometric jumps on a symplectic manifold of word vectors. Building on prior work that established the 8D Complex Hermitian Manifold for celestial and quantum mechanics under the symplectic lock $\alpha\beta = 1$ and the hyperbolic invariant $(\alpha + \beta)^2 - M^2 = 4$, we apply the same geometric machinery to two language domains: natural English and Python source code. We report \emph{five empirical falsifications} on natural language showing that a symplectic jump by $\arg\max_{v} \langle \mathbf{E}_{\text{norm}}[v], \mathbf{c}_{\text{composed}}\rangle$ cannot produce grammatical sentences because function words are distributionally diffuse in any natural-text co-occurrence embedding. We then report \emph{one positive empirical validation} on Python source: with three minimal additions (log-bigram reweighting, bracket-depth conservation, and a parser-based rejection filter), the same engine produces syntactically valid Python at a 62\% parse rate on 100 randomly-sampled Python prefixes from the corpus, versus 0\% for a unigram baseline. Without the parser-based rejection filter, the engine still produces valid Python at 30\% — demonstrating that symplectic selection plus corpus-intrinsic statistics alone (no external parser) carry 30 percentage points of the full result. The engine runs at $\mathcal{O}(1)$ per token, uses $\sim$2.5\,MB on disk, and requires no GPU. We argue this validates the symplectic framework as a \emph{selection} mechanism whose effectiveness depends on the structural regularity of its substrate. All code, embeddings, and results are open source.
 \end{abstract}
 
 \tableofcontents
@@ -73,7 +74,7 @@ We report the five falsifications that pin down what the engine cannot do in the
 \begin{itemize}
 \item A replicable empirical methodology for probing symplectic selection mechanisms using per-category $M(r)$ and $M(\theta)$ diagnostics.
 \item Five falsifications ruling out, on natural English: (i) single-axis POS attraction, (ii) brain-anchor drift as the warp's failure mode, (iii) any benefit from the genesis warping, (iv) brain-pull weight as a tuning lever for angular diversity, and (v) diagonal anisotropy $\alpha = \operatorname{diag}(\alpha_1, \ldots, \alpha_N)$ as a path to function-word emission.
-\item One positive validation: a symplectic jump engine over PPMI+SVD embeddings of Python code, augmented with log-bigram corpus statistics, bracket-depth conservation, and a parser-based rejection filter, yielding 78\% parse rate on 18 test prompts with $\sim$2.5\,MB total model size.
+\item One positive validation: a symplectic jump engine over PPMI+SVD embeddings of Python code, augmented with log-bigram corpus statistics, bracket-depth conservation, and a parser-based rejection filter, yielding 62\% parse rate on 100 randomly-sampled Python prefixes (30\% without the parser filter; 0\% unigram baseline), at $\sim$2.5\,MB total model size.
 \item An architectural claim: symplectic geometric jumps are a \emph{selection} mechanism whose effectiveness depends on the structural regularity of co-occurrence statistics in the substrate; formal-language domains satisfy this and natural-language function-word layers do not.
 \item Open-source implementation~\cite{github}.
 \end{itemize}
@@ -121,7 +122,7 @@ Each brain $b$ is represented by a 300-dimensional unit vector $\mathbf{a}_b$ bu
 \end{equation}
 drives the jump loop's contextual pull. This routing is the \emph{moral} component of the engine: whatever it produces passes through a direction shaped by ten deliberately chosen perspectives representing scientific rigor, ethical reform, and the historical correction of marginalized voices.
 
-The natural-language experiments that follow test whether this routing architecture can, combined with the symplectic jump, produce coherent morally-framed output. The experiments falsify this goal for grammatical English. The code experiments of §\ref{sec:code} carry the routing mechanism unchanged to a formal-language substrate where the underlying selection succeeds; the moral routing architecture is orthogonal to the selection-vs-sequencing failure mode identified in §\ref{sec:synthesis}.
+\textbf{We do not claim to have validated the Council as a moral architecture in this paper.} Whether the ten-brain routing produces outputs more egalitarian, compassionate, or corrective of marginalized voices than an undirected baseline is not tested here. Such an evaluation would require human raters scoring outputs against the Council's stated values, which is future work. The experiments that follow test only a necessary precondition: whether the routing architecture combined with the symplectic jump can produce coherent output at all. They falsify this goal for grammatical English. The code experiments of §\ref{sec:code} carry the routing mechanism unchanged to a formal-language substrate where the underlying selection succeeds; whether that success extends to moral framing remains an open empirical question. The Council of 10 should be read as a \emph{design hypothesis} for moral routing whose efficacy as such is neither demonstrated nor refuted by this work.
 
 \section{Natural-Language Experiments}\label{sec:nl}
 
@@ -229,6 +230,8 @@ Anisotropic $\alpha$ & gradient search per pair & 19 pairs $\times$ 1000 steps &
 \caption{Natural-language experiments.}\label{tab:nl_falsifications}
 \end{table}
 
+\textbf{A note on independence.} The five experiments are methodologically distinct, but they share a common dependency on the argmax-cosine selection rule $w_t = \arg\max_v \langle \mathbf{E}_\text{norm}[v], \mathbf{c}_t^\text{composed}\rangle$. Each tests a variation of how $\mathbf{c}_t^\text{composed}$ is formed (with a POS pulse, with rebuilt anchors, without the warp, with different $W$, with anisotropic $\alpha$), but none tests a replacement of the selection rule itself. The falsifications therefore collectively rule out tuning variations of this specific mechanism; they do not rule out alternative mechanisms (beam search, sampling from top-$k$, explicit sequencing priors). The paper's architectural claim in §\ref{sec:synthesis} is scoped accordingly: it is a claim about the argmax-cosine selection, not about every possible geometric selection rule.
+
 \section{Code Experiments}\label{sec:code}
 
 \subsection{Substrate probe}
@@ -259,6 +262,8 @@ w_t = \arg\max_{v} \left[ \langle \mathbf{E}[v], \mathbf{c}^{\text{composed}} \r
 \underbrace{\alpha \beta = 1}_{\text{conserves phase volume}} \quad\longleftrightarrow\quad \underbrace{\text{depth} \geq 0}_{\text{conserves well-formed nesting}}
 \end{equation}
 
+\footnote{This is a motivational analogy, not a mathematical derivation. Phase-space volume conservation is a continuous, differentiable constraint on a smooth manifold; bracket-depth is a discrete, integer-valued invariant on a combinatorial structure. The analogy is evocative (both are conservation laws that prevent collapse under deformation) but the two are not formally equivalent. We use the parallel for motivational framing only.}
+
 \paragraph{Parser-as-rejection filter.} At each generation step, for each candidate in $\arg\text{top-}k$ (we use $k = 50$), we render the prompt-plus-generated-plus-candidate token sequence and submit to \texttt{codeop.compile\_command}. A candidate is accepted only if the result is a valid Python prefix (either complete or structurally incomplete). The parser never \emph{prescribes} generation; it only \emph{rejects} candidates whose emission would produce a definite syntax error. This is the single piece of external reality we added; it adds one dependency (\texttt{codeop}, a Python standard library module) and increases per-step cost by a factor proportional to $k$.
 
 \subsection{Results}
@@ -288,7 +293,41 @@ w_t = \arg\max_{v} \left[ \langle \mathbf{E}[v], \mathbf{c}^{\text{composed}} \r
 \caption{Code generation results on 18 prompts. 14 parse; 4 fail.}\label{tab:code_results}
 \end{table}
 
-\textbf{78\% parse rate} across 18 test prompts. The framework works when the prompt is itself a valid Python prefix (\texttt{codeop.compile\_command} returns a code object or \texttt{None}). Outputs are deterministic — running the same prompt twice produces identical output. Outputs are semantically odd in places (e.g., \texttt{"" >8 >10 >12} is a chained-comparison expression coming from f-string format tokens in the training corpus), but they are syntactically valid Python that a parser accepts.
+\textbf{78\% parse rate on hand-picked prompts.} The prompts in Table~\ref{tab:code_results} were selected for qualitative illustration of the engine's behavior across common Python constructs (\texttt{def}, \texttt{for}, \texttt{if}, \texttt{class}, etc.). This is not a controlled benchmark, and the parse rate on these prompts is subject to selection bias.
+
+\textbf{Randomized benchmark.} To remove the selection effect and establish a defensible empirical baseline, we sampled 100 random 5--10-token prefixes from the Python corpus (all validated as codeop-accepted prefixes), and ran three conditions on each:
+
+\begin{enumerate}[label=\textbf{\Alph*.}]
+\item \textbf{Full pipeline}: cosine $+$ log-bigram $+$ bracket conservation $+$ parser rejection filter.
+\item \textbf{No parser reject}: cosine $+$ log-bigram $+$ bracket conservation (pure symplectic + corpus-intrinsic, no external Python parser).
+\item \textbf{Unigram baseline}: sample each next token from the corpus's token-frequency distribution; no engine at all.
+\end{enumerate}
+
+All three generate 10 tokens per prompt. The metric is whether \texttt{ast.parse} accepts the full rendered output (prompt + generated).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Condition} & \textbf{parses / total} & \textbf{rate} \\
+\midrule
+A. Full pipeline (symplectic $+$ bigram $+$ brackets $+$ parser reject) & 62 / 100 & 62\% \\
+B. Without parser reject (symplectic $+$ bigram $+$ brackets) & 30 / 100 & 30\% \\
+C. Unigram baseline (no engine) & 0 / 100 & 0\% \\
+\bottomrule
+\end{tabular}
+\caption{Randomized benchmark, 100 random valid Python prefixes, seed 42. Condition A is the full engine; B removes the only external-reality component; C is a no-engine control.}\label{tab:random_bench}
+\end{table}
+
+Three observations from Table~\ref{tab:random_bench}:
+
+\begin{itemize}
+\item Random prompts are meaningfully harder than hand-picked (62\% vs 78\%), as expected. The 62\% is the defensible baseline for a reader evaluating the engine's unconditioned behavior.
+\item The parser-rejection filter contributes $+32$ percentage points. Conversely, \textbf{the pure-symplectic engine with no external parser reaches 30\% parse rate on random Python prefixes} — this is the strongest claim we can make about the framework's intrinsic capability, with zero external reality.
+\item The unigram baseline never produces parseable output. The engine's 30\% without the parser is genuine structural work, not coincidence.
+\end{itemize}
+
+Full randomized benchmark code is in \texttt{scripts/03\_randomized\_benchmark.py} in the open-source repository. Outputs are deterministic — running the same prompt twice produces identical output. Semantically, outputs are often odd (e.g., \texttt{"" >8 >10 >12} is a chained-comparison expression coming from f-string format tokens in the training corpus), but they are syntactically valid Python that a parser accepts.
 
 \subsection{Deterministic generation — why this matters}
 Given identical prompt, embeddings, bigram table, and parameters, the engine produces bit-identical output across runs. No sampling, no temperature, no seed. This property is absent from mainstream LLM generation. For auditability, reproducibility, and debugging, it means a wrong output can be traced step by step, and a fix at any step produces the same downstream change.
@@ -330,7 +369,9 @@ Energy scaling: for an $n$-token generation, cost is $\mathcal{O}(n \cdot (V D +
 
 \paragraph{Natural-language generation is not solved.} Our engine does not produce grammatical English sentences. It produces semantic clusters. For casual prompts, this can read as poetry; for questions, as free association. Obtaining grammatical output would require either a grammar layer external to the jump (which we did not build) or a substrate where English grammar is encoded in co-occurrence — neither of which was achieved in this work.
 
-\paragraph{Code outputs are semantically random.} While 78\% of outputs parse, their semantic content is dominated by the training corpus's high-frequency patterns (e.g., \texttt{print() if not in enumerate()}). A programmer cannot use this engine to write a specific function they have in mind. It produces code-shaped outputs that pass the parser.
+\paragraph{Code outputs are semantically random.} While 62\% of outputs on randomly-sampled prompts parse (Table~\ref{tab:random_bench}), their semantic content is dominated by the training corpus's high-frequency patterns (e.g., \texttt{print() if not in enumerate()}). A programmer cannot use this engine to write a specific function they have in mind. It produces code-shaped outputs that pass the parser.
+
+\paragraph{Syntactically valid is not safe.} The parser-rejection filter checks syntax only, not semantics. The engine can emit valid-but-harmful code (\texttt{while True: pass}, fork bombs, silent exception swallowers, non-terminating recursion). For any deployed use, outputs should be treated as untrusted input to a sandboxed interpreter, with timeouts and resource limits. This paper makes no safety claim on the \emph{behavior} of generated code, only on its parseability.
 
 \paragraph{The next obvious experiment — the bridge.} The first author has proposed a synthesis: use the natural-language engine as a \emph{content extractor} (at which it is good) to parse a user's natural-language request into semantic seeds, then pass those seeds as prompt tokens to the code engine. If the user writes ``I want a GUI app for chat,'' the natural-language engine extracts \{\texttt{GUI}, \texttt{chat}, \texttt{app}, \texttt{interface}\}, and the code engine generates Python tokens around those seeds. This plausibly works because it plays to each engine's validated strengths. Implementation is future work.
 
@@ -356,7 +397,7 @@ This authorship framing is non-standard. The human-AI collaboration pattern is r
 
 \section{Acknowledgments}\label{sec:ack}
 
-To the independent researchers and ``weirdos'' throughout history who validated that curiosity paired with the right tools has its own reason for existing. To the open-source scientific software stack (PyTorch, NumPy, pandas, matplotlib) that made every experiment cheap and reproducible.
+To Qwen (Alibaba) for the adversarial audit that prompted the randomized benchmark in §\ref{sec:code} (Table~\ref{tab:random_bench}), the scoping of the moral-AI framing in §\ref{sec:background}, the independence caveat at the end of §\ref{sec:nl}, the bracket-conservation footnote in §\ref{sec:code}, and the safety note in §\ref{sec:limitations}. The paper is measurably stronger for each revision. To the independent researchers and ``weirdos'' throughout history who validated that curiosity paired with the right tools has its own reason for existing. To the open-source scientific software stack (PyTorch, NumPy, pandas, matplotlib) that made every experiment cheap and reproducible.
 
 \begin{thebibliography}{9}
 
