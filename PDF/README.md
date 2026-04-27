@@ -49,4 +49,4 @@ README).
 
 ---
 
-**License:** MIT.  See `LICENSE` in the repo root.
+**License:** MIT.  See `LICENSE` in the repo root. 
