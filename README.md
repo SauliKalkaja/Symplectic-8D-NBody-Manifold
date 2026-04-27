@@ -84,4 +84,4 @@ This repository represents a new frontier in theoretical exploration. The mathem
 All Python solvers, diagnostic suites, and visualization scripts are open-source and available in their respective directories. You are encouraged to clone, critique, and push the boundaries of the Symplectic Lock.
 
 ### 📜 License
-MIT. See `LICENSE`.
+MIT. See `LICENSE`. 
